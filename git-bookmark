@@ -1,26 +1,33 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC2154,SC2002
+# shellcheck disable=SC2154
+
+set -o errexit   # abort on nonzero exitstatus
+set -o nounset   # abort on unbound variable
+set -o pipefail  # don't hide errors within pipes
+# set -o xtrace
+
+
 
 eval "$(
   docopts -V - -h - : "$@" <<EOF
 Usage:
-    git-bookmark init [--session=<name>] [--branch=<name>]
-    git-bookmark add  [--session=<name>] [--branch=<name>] <url>...
-    git-bookmark edit [--session=<name>] [--branch=<name>] [--editor=<executable>]
-    git-bookmark open [--session=<name>] [--branch=<name>] [--browser=<executable>]
-    git-bookmark list [--session=<name>]
+    git-bookmark init [--gitv] [--session=<name>] [--branch=<name>]
+    git-bookmark add  [--gitv] [--session=<name>] [--branch=<name>] <url>...
+    git-bookmark edit [--gitv] [--session=<name>] [--branch=<name>] [--editor=<executable>]
+    git-bookmark open [--gitv] [--session=<name>] [--branch=<name>] [--browser=<executable>]
+    git-bookmark list [--gitv] [--session=<name>]
     git-bookmark -h | --help
     git-bookmark --version
 
     Options:
-    -h --help               Show this screen.
-    --version               Show version.
+    -h --help               Displays this screen.
+    --version               Displays version information.
 
     --session=<name>        Name of the bookmark file
                             [default: master].
 
-    --branch=<name>         Name of the branch
+    --branch=<name>         Name of the branch to look for the bookmark file
                             [default: bookmarks].
 
     --editor=<executable>   Editor to use when editing a bookmark file 
@@ -28,6 +35,8 @@ Usage:
 
     --browser=<executable>  Browser to use when opening from a bookmark file
                             [default: $BROWSER].
+
+    --gitv                  Show all of the underlyings git commands stderr.
 
 ----
   git-bookmark 0.1.0
@@ -40,16 +49,25 @@ EOF
 
 require_git_repo() {
   # Abort when a git repo isn't found
-  if ! git rev-parse --git-dir >/dev/null 2>/dev/null; then
+  if ! _git rev-parse --git-dir >/dev/null; then
     echo "Not inside a git repo. Aborting"
     exit 1
   fi
 }
 
-enter_bookmark_branch() {
+_git() {
+  if "$gitv"; then
+    { git "$@" ; }
+  else
+    { git "$@" ; } 2> /dev/null
+  fi
+}
+
+
+enter_branch() {
   # Enter the branch to work with
-  clone_dir="$(mktemp -d)"
-  if ! git clone . --branch="$branch" "$clone_dir" 2>/dev/null; then
+  clone_dir="$(mktemp --directory)"
+  if ! _git clone . --branch="$branch" "$clone_dir"; then
     echo 'Bookmark branch not initialized. Aborting.'
     echo ''
     echo "Tip: Run 'git bookmark init'"
@@ -57,32 +75,21 @@ enter_bookmark_branch() {
   fi
 
   # Change directory to our cloned repo
-  # Trap EXIT to git checkout to the original branch
   cd "$clone_dir" > /dev/null || exit 1
 }
 
-commit() {
-  # Add our changes and commit them
-  # Pass all arguments to `git commit`
-  # Push to original repo
-  git add "$session"
-  git commit "$@"
-  git push 2>/dev/null
+_git_acp() {
+  _git add "$session"
+  _git commit "$@"
+  _git push origin "$branch"
 }
 
-add() {
-  # Just append the urls with a newline
-
-  echo "$1" >>"$session"
-}
-
-listing() {
+list_bookmarks() {
   # Read our bookmarks file
   # Strip: comments, empty lines, leading&trailing spaces
-
-  cat "$session" |
-    sed -e 's/\s*#.*$//' |
-    sed 's/^ *//; s/ *$//; /^$/d'
+  sed --expression 's/\s*#.*$//' \
+      --expression 's/^ *//; s/ *$//; /^$/d' \
+      "$session"
 }
 
 # Begin
@@ -90,35 +97,39 @@ require_git_repo
 
 # When Initiating
 if $init; then
-  # shellcheck disable=SC2064
-  trap "git checkout -q $(git rev-parse --symbolic-full-name --abbrev-ref HEAD)" EXIT
-  git checkout --orphan "$branch"
-  git rm -rf .
+  original_dir="$(pwd -P)"
+  clone_dir="$(mktemp --directory)"
+  cd "$clone_dir" > /dev/null || exit 1
+
+  _git init
+  _git remote add origin "$original_dir"
+  _git checkout -b "$branch"
+
   touch "$session"
-  commit -m "Initial Commit"
+  _git_acp --message "Initial Commit" --allow-empty
+
 
 # When Adding
 elif $add; then
-  enter_bookmark_branch
+  enter_branch
   for u in "${url[@]}"; do
-    add "${u}"
+    echo "${u}" >> "$session"
   done
-  commit -m "Added ${#url[@]} new bookmarks"
+  _git_acp --message "Added ${#url[@]} new bookmarks"
 
 # When Editing
 elif $edit; then
-  enter_bookmark_branch
+  enter_branch
   "$editor" "$session"
-  commit
+  _git_acp
 
 # When Opening
 elif $open; then
-  enter_bookmark_branch
-  listing | xargs -L1 "$browser"
+  enter_branch
+  list_bookmarks | xargs "$browser"
 
 # When Listing
 elif $list; then
-  exec 2>/dev/null
-  enter_bookmark_branch
-  listing
+  enter_branch
+  list_bookmarks
 fi

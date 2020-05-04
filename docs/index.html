@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>git-bookmark(1) - Keep your bookmarks with your repository</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#EXAMPLES">EXAMPLES</a>
+    <a href="#COPYRIGHT">COPYRIGHT</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>git-bookmark(1)</li>
+    <li class='tc'></li>
+    <li class='tr'>git-bookmark(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>git-bookmark</code> - <span class="man-whatis">Keep your bookmarks with your repository</span>
+</p>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<p><code>git-bookmark</code> add  [--session=<var>name</var>] [--branch=<var>name</var>] <var>url</var>...<br />
+<code>git-bookmark</code> init [--session=<var>name</var>] [--branch=<var>name</var>]<br />
+<code>git-bookmark</code> edit [--session=<var>name</var>] [--branch=<var>name</var>] [--editor=<var>executable</var>]<br />
+<code>git-bookmark</code> open [--session=<var>name</var>] [--branch=<var>name</var>] [--browser=<var>executable</var>]<br />
+<code>git-bookmark</code> list [--session=<var>name</var>]<br />
+<code>git-bookmark</code> -h | --help<br />
+<code>git-bookmark</code> --version</p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>Simple git subcommand to save URLs into append files in a separate branch. The goal is to keep web sessions related to a repository within it.</p>
+
+<p>The bookmark file format supports # comments and ignores any extra whitespace. URLs are never checked for validity.</p>
+
+<p>Using the packaged <code>make install</code> also installs <code>git-bk</code> as an alias. This lets <code>git bk</code> be used for brevity sake.</p>
+
+<h2 id="OPTIONS">OPTIONS</h2>
+
+<dl>
+<dt><code>-h</code>, <code>--help</code> </dt><dd><p>Displays the help screen.</p></dd>
+<dt><code>--version</code> </dt><dd><p>Displays version information.</p></dd>
+<dt><code>--session=&lt;name></code> </dt><dd><p>Name of the bookmark file [default: master].</p></dd>
+<dt><code>--branch=&lt;name></code> </dt><dd><p>Name of the branch to look for the bookmark file [default: bookmarks].</p></dd>
+<dt><code>--editor=&lt;executable></code> </dt><dd><p>Editor to use when editing a bookmark file [default: $EDITOR].</p></dd>
+<dt><code>--browser=&lt;executable></code> </dt><dd><p>Browser to use when opening from a bookmark file [default: $BROWSER].</p></dd>
+<dt><code>--git-verbose</code> </dt><dd><p>Show all of the underlyings git commands output.</p></dd>
+</dl>
+
+
+<h2 id="EXAMPLES">EXAMPLES</h2>
+
+<p>Start by <strong>initializing</strong> a new branch to keep the bookmarks within:</p>
+
+<pre><code>$ git bk init
+</code></pre>
+
+<p>You may not like the default branch or you may want to use multiple branches. You need to <strong>initialize</strong> for any branch you use.</p>
+
+<pre><code>$ git bk init --branch=other
+</code></pre>
+
+<p><strong>Initializing</strong> is optional if the branch already exists.</p>
+
+<p>New bookmarks can be easily <strong>added</strong>. Each <code>add</code> command is a commit on the underlying branch:</p>
+
+<pre><code>$ git bk add https://github.com/stephenmathieson/git-standup
+$ git bk add https://github.com/basherpm/basher https://en.wikipedia.org/wiki/Man_page
+</code></pre>
+
+<p>When <strong>adding</strong> the defaults can be overriden with their respective options:</p>
+
+<pre><code>$ git bk add --branch=other --session=local http://127.0.0.1:35729/
+</code></pre>
+
+<p>Comments can be added inline:</p>
+
+<pre><code>$ git bk add --branch=other --session=local "http://127.0.0.1:8000/ # Server"
+</code></pre>
+
+<p>The bookmarks can be <strong>listed</strong> as well:</p>
+
+<pre><code>$ git bk list
+https://github.com/stephenmathieson/git-standup
+https://github.com/basherpm/basher
+https://en.wikipedia.org/wiki/Man_page
+
+$ git bk list --branch=other --session=local 
+http://127.0.0.1:35729/
+http://127.0.0.1:8000/
+</code></pre>
+
+<p>If more manual intervention you can <strong>edit</strong> the file by hand:</p>
+
+<pre><code>$ git bk edit
+</code></pre>
+
+<p>By default, it uses <code>$EDITOR</code>, but anything in <code>$PATH</code> can be specified:</p>
+
+<pre><code>$ git bk edit --editor=cat --git-verbose
+https://github.com/stephenmathieson/git-standup
+https://github.com/basherpm/basher
+https://en.wikipedia.org/wiki/Man_page
+On branch bookmarks
+Your branch is up to date with 'origin/bookmarks'.
+
+nothing to commit, working tree clean
+</code></pre>
+
+<p>We can see here with the help of <code>--git-verbose</code> option, that no commit is generated when no changes are made when editing.</p>
+
+<p>We're here.<br />
+Finally, we've arrived to our end <strong>goal</strong>! To <strong>open</strong> the saved bookmarks in your <code>$BROWSER</code> simply run:</p>
+
+<pre><code>$ git bk open 
+</code></pre>
+
+<p>And of course, we can use any of usual options when <strong>opening</strong>:</p>
+
+<pre><code>$ git bk open --browser=echo --session=local --branch=other
+http://127.0.0.1:35729/
+http://127.0.0.1:8000/
+</code></pre>
+
+<h2 id="COPYRIGHT">COPYRIGHT</h2>
+
+<p><strong>git-bookmark</strong> - Copyright 2020, Xavier Francisco.
+Released under the MIT license.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><span class="man-ref">git<span class="s">(1)</span></span></p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>May 2020</li>
+    <li class='tr'>git-bookmark(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>

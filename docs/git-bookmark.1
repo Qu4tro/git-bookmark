@@ -1,0 +1,229 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "GIT\-BOOKMARK" "1" "May 2020" "" ""
+.
+.SH "NAME"
+\fBgit\-bookmark\fR \- Keep your bookmarks with your repository
+.
+.SH "SYNOPSIS"
+\fBgit\-bookmark\fR add [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] \fIurl\fR\.\.\.
+.
+.br
+\fBgit\-bookmark\fR init [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR]
+.
+.br
+\fBgit\-bookmark\fR edit [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-editor=\fIexecutable\fR]
+.
+.br
+\fBgit\-bookmark\fR open [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-browser=\fIexecutable\fR]
+.
+.br
+\fBgit\-bookmark\fR list [\-\-session=\fIname\fR]
+.
+.br
+\fBgit\-bookmark\fR \-h | \-\-help
+.
+.br
+\fBgit\-bookmark\fR \-\-version
+.
+.SH "DESCRIPTION"
+Simple git subcommand to save URLs into append files in a separate branch\. The goal is to keep web sessions related to a repository within it\.
+.
+.P
+The bookmark file format supports # comments and ignores any extra whitespace\. URLs are never checked for validity\.
+.
+.P
+Using the packaged \fBmake install\fR also installs \fBgit\-bk\fR as an alias\. This lets \fBgit bk\fR be used for brevity sake\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Displays the help screen\.
+.
+.TP
+\fB\-\-version\fR
+Displays version information\.
+.
+.TP
+\fB\-\-session=<name>\fR
+Name of the bookmark file [default: master]\.
+.
+.TP
+\fB\-\-branch=<name>\fR
+Name of the branch to look for the bookmark file [default: bookmarks]\.
+.
+.TP
+\fB\-\-editor=<executable>\fR
+Editor to use when editing a bookmark file [default: $EDITOR]\.
+.
+.TP
+\fB\-\-browser=<executable>\fR
+Browser to use when opening from a bookmark file [default: $BROWSER]\.
+.
+.TP
+\fB\-\-git\-verbose\fR
+Show all of the underlyings git commands output\.
+.
+.SH "EXAMPLES"
+Start by \fBinitializing\fR a new branch to keep the bookmarks within:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk init
+.
+.fi
+.
+.IP "" 0
+.
+.P
+You may not like the default branch or you may want to use multiple branches\. You need to \fBinitialize\fR for any branch you use\.
+.
+.IP "" 4
+.
+.nf
+
+$ git bk init \-\-branch=other
+.
+.fi
+.
+.IP "" 0
+.
+.P
+\fBInitializing\fR is optional if the branch already exists\.
+.
+.P
+New bookmarks can be easily \fBadded\fR\. Each \fBadd\fR command is a commit on the underlying branch:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk add https://github\.com/stephenmathieson/git\-standup
+$ git bk add https://github\.com/basherpm/basher https://en\.wikipedia\.org/wiki/Man_page
+.
+.fi
+.
+.IP "" 0
+.
+.P
+When \fBadding\fR the defaults can be overriden with their respective options:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk add \-\-branch=other \-\-session=local http://127\.0\.0\.1:35729/
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Comments can be added inline:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk add \-\-branch=other \-\-session=local "http://127\.0\.0\.1:8000/ # Server"
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The bookmarks can be \fBlisted\fR as well:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk list
+https://github\.com/stephenmathieson/git\-standup
+https://github\.com/basherpm/basher
+https://en\.wikipedia\.org/wiki/Man_page
+
+$ git bk list \-\-branch=other \-\-session=local
+http://127\.0\.0\.1:35729/
+http://127\.0\.0\.1:8000/
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If more manual intervention you can \fBedit\fR the file by hand:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk edit
+.
+.fi
+.
+.IP "" 0
+.
+.P
+By default, it uses \fB$EDITOR\fR, but anything in \fB$PATH\fR can be specified:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk edit \-\-editor=cat \-\-git\-verbose
+https://github\.com/stephenmathieson/git\-standup
+https://github\.com/basherpm/basher
+https://en\.wikipedia\.org/wiki/Man_page
+On branch bookmarks
+Your branch is up to date with \'origin/bookmarks\'\.
+
+nothing to commit, working tree clean
+.
+.fi
+.
+.IP "" 0
+.
+.P
+We can see here with the help of \fB\-\-git\-verbose\fR option, that no commit is generated when no changes are made when editing\.
+.
+.P
+We\'re here\.
+.
+.br
+Finally, we\'ve arrived to our end \fBgoal\fR! To \fBopen\fR the saved bookmarks in your \fB$BROWSER\fR simply run:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk open
+.
+.fi
+.
+.IP "" 0
+.
+.P
+And of course, we can use any of usual options when \fBopening\fR:
+.
+.IP "" 4
+.
+.nf
+
+$ git bk open \-\-browser=echo \-\-session=local \-\-branch=other
+http://127\.0\.0\.1:35729/
+http://127\.0\.0\.1:8000/
+.
+.fi
+.
+.IP "" 0
+.
+.SH "COPYRIGHT"
+\fBgit\-bookmark\fR \- Copyright 2020, Xavier Francisco\. Released under the MIT license\.
+.
+.SH "SEE ALSO"
+git(1)
