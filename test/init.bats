@@ -2,46 +2,16 @@
 
 load 'test_helper/bats-support/load'
 load 'test_helper/bats-assert/load'
+load common
 
 setup(){
-  mkdir -p "$BATS_TMPDIR/test-git-bk"
-  cd "$BATS_TMPDIR/test-git-bk"
-  git init
-  git commit -m "Master commit" --allow-empty
-
-  # Dirty up the work tree
-  touch staged
-  git add staged
-
-  touch untracked
+  repo_setup
+  repo_dirty_worktree
 }
 
-no_changes_to_worktree(){
-  :
-}
 
 teardown(){
-  rm -rf "$BATS_TMPDIR/test-git-bk"
-}
-
-branch_exists(){
-  git show-ref --verify --quiet "refs/heads/$1"
-}
-
-last_commit_message(){
-  git show --no-patch --format=%s "$1"
-}
-
-number_of_commits(){
-  git rev-list --count "$1"
-}
-
-number_of_files(){
-  git show --name-only --format= "$1" | wc -l
-}
-
-file_exists_in_branch(){
-  git cat-file -e "$1:$2"
+  repo_teardown
 }
 
 @test "init - bare" {

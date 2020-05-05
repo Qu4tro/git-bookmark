@@ -2,32 +2,16 @@
 
 load 'test_helper/bats-support/load'
 load 'test_helper/bats-assert/load'
+load common
 
 setup(){
-  mkdir -p "$BATS_TMPDIR/test-git-bk"
-  cd "$BATS_TMPDIR/test-git-bk"
-  git init
-  git commit -m "Master commit" --allow-empty
-
-  # Init some repos, so we can add in
-
-  git bk init --branch empty
-  git bk init --branch other_branch
-  git bk init --session other_session
-
-  # Dirty up the work tree
-  touch staged
-  git add staged
-
-  touch untracked
-}
-
-no_changes_to_worktree(){
-  :
+  repo_setup
+  repo_manually_populate
+  repo_dirty_worktree
 }
 
 teardown(){
-  rm -rf "$BATS_TMPDIR/test-git-bk"
+  repo_teardown
 }
 
 @test "add - bare" {
@@ -48,7 +32,7 @@ teardown(){
 
 
 @test "add - with --branch" {
-  run git bk add --branch=other_branch "url1"
+  run git bk add --branch=bookmarks2 "url1"
   assert_line --partial "Added 1 new bookmarks"
   assert_line --partial "1 file changed"
   assert_line --partial "1 insertion"
