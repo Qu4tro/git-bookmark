@@ -3,13 +3,15 @@ git-bookmark(1) -- Keep your bookmarks with your repository
 
 ## SYNOPSIS
 
-`git-bookmark` init [--session=<name>] [--branch=<name>] [--gitv]  
-`git-bookmark` add  [--session=<name>] [--branch=<name>] [--gitv] <url>...  
-`git-bookmark` edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>] [--message=<message>]  
-`git-bookmark` open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]  
-`git-bookmark` list [--session=<name>] [--branch=<name>] [--gitv]  
-`git-bookmark` -h | --help  
-`git-bookmark` --version  
+```
+git-bookmark init [--session=<name>] [--branch=<name>] [--gitv]  
+git-bookmark add  [--session=<name>] [--branch=<name>] [--gitv] <url>...  
+git-bookmark edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>] [--message=<message>]  
+git-bookmark open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]  
+git-bookmark list [--session=<name>] [--branch=<name>] [--gitv]  
+git-bookmark -h | --help  
+git-bookmark --version  
+```
 
 ## INSTALLATION
 
@@ -19,7 +21,7 @@ git-bookmark(1) -- Keep your bookmarks with your repository
 
 ### Package managers
 
-If you're on Arch Linux `git-bookmark` is available on AUR:
+If you're on Arch Linux `git-bookmark` is available on AUR [WIP]:
 - [AUR Package](https://aur.archlinux.org/packages/git-bookmark/)
 
 
@@ -101,7 +103,7 @@ When **adding** the defaults can be overriden with their respective options:
 
     $ git bk add --branch=other --session=local http://127.0.0.1:35729/
 
-Comments can be added inline:
+Comments can be **added** inline:
 
     $ git bk add --branch=other --session=local "http://127.0.0.1:8000/ # Server"
 
