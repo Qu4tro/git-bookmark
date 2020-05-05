@@ -3,11 +3,11 @@ git-bookmark(1) -- Keep your bookmarks with your repository
 
 ## SYNOPSIS
 
-`git-bookmark` add  [--session=<name>] [--branch=<name>] <url>...  
-`git-bookmark` init [--session=<name>] [--branch=<name>]  
-`git-bookmark` edit [--session=<name>] [--branch=<name>] [--editor=<executable>]  
-`git-bookmark` open [--session=<name>] [--branch=<name>] [--browser=<executable>]  
-`git-bookmark` list [--session=<name>]  
+`git-bookmark` init [--session=<name>] [--branch=<name>] [--gitv]  
+`git-bookmark` add  [--session=<name>] [--branch=<name>] [--gitv] <url>...  
+`git-bookmark` edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>]  
+`git-bookmark` open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]  
+`git-bookmark` list [--session=<name>] [--branch=<name>] [--gitv]  
 `git-bookmark` -h | --help  
 `git-bookmark` --version  
 
@@ -62,7 +62,7 @@ Using the packaged `make install` also installs `git-bk` as an alias. This lets 
    Displays version information.
 
  * `--session=<name>` : 
-   Name of the bookmark file [default: master].
+   Name of the bookmark file [default: links].
 
  * `--branch=<name>` : 
    Name of the branch to look for the bookmark file [default: bookmarks].

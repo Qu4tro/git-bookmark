@@ -1,4 +1,4 @@
-.PHONY: all help lint install uninstall
+.PHONY: all help lint test install uninstall
 PREFIX ?= /usr/local
 DESTDIR ?=
 BINDIR ?= $(PREFIX)/bin
@@ -8,6 +8,7 @@ TASK_DONE = echo -e "\n✓ $@ done\n"
 all help:
 	@echo "Usage:"
 	@echo "  make lint"
+	@echo "  make test"
 	@echo "  make docs"
 	@echo "  make install"
 	@echo "  make uninstall"
@@ -31,6 +32,9 @@ docs/index.html: docs/git-bookmark.1.html
 lint:
 	shellcheck -s bash git-bookmark
 	@$(TASK_DONE)
+
+test:
+	bats test
 
 install:
 	@install -v -d "$(DESTDIR)$(MANDIR)/man1"

@@ -12,11 +12,11 @@ set -o pipefail  # don't hide errors within pipes
 eval "$(
   docopts -V - -h - : "$@" <<EOF
 Usage:
-    git-bookmark init [--gitv] [--session=<name>] [--branch=<name>]
-    git-bookmark add  [--gitv] [--session=<name>] [--branch=<name>] <url>...
-    git-bookmark edit [--gitv] [--session=<name>] [--branch=<name>] [--editor=<executable>]
-    git-bookmark open [--gitv] [--session=<name>] [--branch=<name>] [--browser=<executable>]
-    git-bookmark list [--gitv] [--session=<name>]
+    git-bookmark init [--session=<name>] [--branch=<name>] [--gitv]
+    git-bookmark add  [--session=<name>] [--branch=<name>] [--gitv] <url>...
+    git-bookmark edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>]
+    git-bookmark open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]
+    git-bookmark list [--session=<name>] [--branch=<name>] [--gitv]
     git-bookmark -h | --help
     git-bookmark --version
 
@@ -66,8 +66,8 @@ _git() {
 
 enter_branch() {
   # Enter the branch to work with
-  clone_dir="$(mktemp --directory)"
-  if ! _git clone . --branch="$branch" "$clone_dir"; then
+  clone="$(mktemp --directory)"
+  if ! _git clone . --branch="$branch" "$clone"; then
     echo 'Bookmark branch not initialized. Aborting.'
     echo ''
     echo "Tip: Run 'git bookmark init'"
@@ -75,7 +75,7 @@ enter_branch() {
   fi
 
   # Change directory to our cloned repo
-  cd "$clone_dir" > /dev/null || exit 1
+  cd "$clone" > /dev/null || exit 1
 }
 
 _git_acp() {
@@ -97,12 +97,12 @@ require_git_repo
 
 # When Initiating
 if $init; then
-  original_dir="$(pwd -P)"
-  clone_dir="$(mktemp --directory)"
-  cd "$clone_dir" > /dev/null || exit 1
+  original="$(git rev-parse --show-toplevel)"
+  clone="$(mktemp --directory)"
+  cd "$clone" > /dev/null || exit 1
 
-  _git init
-  _git remote add origin "$original_dir"
+  _git init > /dev/null
+  _git remote add origin "$original"
   _git checkout -b "$branch"
 
   touch "$session"

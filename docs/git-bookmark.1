@@ -7,19 +7,19 @@
 \fBgit\-bookmark\fR \- Keep your bookmarks with your repository
 .
 .SH "SYNOPSIS"
-\fBgit\-bookmark\fR add [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] \fIurl\fR\.\.\.
+\fBgit\-bookmark\fR init [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv]
 .
 .br
-\fBgit\-bookmark\fR init [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR]
+\fBgit\-bookmark\fR add [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] \fIurl\fR\.\.\.
 .
 .br
-\fBgit\-bookmark\fR edit [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-editor=\fIexecutable\fR]
+\fBgit\-bookmark\fR edit [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-editor=\fIexecutable\fR]
 .
 .br
-\fBgit\-bookmark\fR open [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-browser=\fIexecutable\fR]
+\fBgit\-bookmark\fR open [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-browser=\fIexecutable\fR]
 .
 .br
-\fBgit\-bookmark\fR list [\-\-session=\fIname\fR]
+\fBgit\-bookmark\fR list [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv]
 .
 .br
 \fBgit\-bookmark\fR \-h | \-\-help
@@ -48,7 +48,7 @@ Displays version information\.
 .
 .TP
 \fB\-\-session=<name>\fR
-Name of the bookmark file [default: master]\.
+Name of the bookmark file [default: links]\.
 .
 .TP
 \fB\-\-branch=<name>\fR

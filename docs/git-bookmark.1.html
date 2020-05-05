@@ -75,11 +75,11 @@
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
-<p><code>git-bookmark</code> add  [--session=<var>name</var>] [--branch=<var>name</var>] <var>url</var>...<br />
-<code>git-bookmark</code> init [--session=<var>name</var>] [--branch=<var>name</var>]<br />
-<code>git-bookmark</code> edit [--session=<var>name</var>] [--branch=<var>name</var>] [--editor=<var>executable</var>]<br />
-<code>git-bookmark</code> open [--session=<var>name</var>] [--branch=<var>name</var>] [--browser=<var>executable</var>]<br />
-<code>git-bookmark</code> list [--session=<var>name</var>]<br />
+<p><code>git-bookmark</code> init [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
+<code>git-bookmark</code> add  [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] <var>url</var>...<br />
+<code>git-bookmark</code> edit [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--editor=<var>executable</var>]<br />
+<code>git-bookmark</code> open [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--browser=<var>executable</var>]<br />
+<code>git-bookmark</code> list [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
 <code>git-bookmark</code> -h | --help<br />
 <code>git-bookmark</code> --version</p>
 
@@ -96,7 +96,7 @@
 <dl>
 <dt><code>-h</code>, <code>--help</code> </dt><dd><p>Displays the help screen.</p></dd>
 <dt><code>--version</code> </dt><dd><p>Displays version information.</p></dd>
-<dt><code>--session=&lt;name></code> </dt><dd><p>Name of the bookmark file [default: master].</p></dd>
+<dt><code>--session=&lt;name></code> </dt><dd><p>Name of the bookmark file [default: links].</p></dd>
 <dt><code>--branch=&lt;name></code> </dt><dd><p>Name of the branch to look for the bookmark file [default: bookmarks].</p></dd>
 <dt><code>--editor=&lt;executable></code> </dt><dd><p>Editor to use when editing a bookmark file [default: $EDITOR].</p></dd>
 <dt><code>--browser=&lt;executable></code> </dt><dd><p>Browser to use when opening from a bookmark file [default: $BROWSER].</p></dd>
