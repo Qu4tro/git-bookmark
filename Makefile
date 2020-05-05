@@ -8,8 +8,9 @@ TASK_DONE = echo -e "\n✓ $@ done\n"
 all help:
 	@echo "Usage:"
 	@echo "  make lint"
-	@echo "  make test"
 	@echo "  make docs"
+	@echo "  make test"
+	@echo "  make test-parallel"
 	@echo "  make install"
 	@echo "  make uninstall"
 
@@ -30,11 +31,17 @@ docs/index.html: docs/git-bookmark.1.html
 	cp "$<" "$@"
 
 lint:
-	shellcheck -s bash git-bookmark
+	@shellcheck -s bash git-bookmark
 	@$(TASK_DONE)
 
 test: test/test_helper/bats-support test/test_helper/bats-assert
-	bats test
+	@bats test
+	@$(TASK_DONE)
+
+test-parallel: test/test_helper/bats-support test/test_helper/bats-assert
+	@bats test --jobs 8
+	@$(TASK_DONE)
+
 
 test/test_helper/bats-support:
 	git clone https://github.com/bats-core/bats-support "$@"

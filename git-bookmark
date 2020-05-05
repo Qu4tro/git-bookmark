@@ -20,7 +20,7 @@ Usage:
     git-bookmark -h | --help
     git-bookmark --version
 
-    Options:
+Options:
     -h --help               Displays this screen.
     --version               Displays version information.
 
@@ -42,11 +42,11 @@ Usage:
     --gitv                  Show all of the underlyings git commands stderr.
 
 ----
-  git-bookmark 0.1.0
-  Copyright (C) 2020 Xavier Francisco
-  License MIT
-  This is free software: you are free to change and redistribute it.
-  There is NO WARRANTY, to the extent permitted by law.
+git-bookmark 0.3.1
+Copyright (C) 2020 Xavier Francisco
+License MIT
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
 EOF
 )"
 
@@ -76,6 +76,7 @@ enter_branch() {
     echo "Tip: Run 'git bookmark init'"
     exit 1
   fi
+  trap '/usr/bin/rm --interactive=never --recursive "$clone"' EXIT
 
   # Change directory to our cloned repo
   cd "$clone" > /dev/null || exit 1
@@ -102,6 +103,7 @@ require_git_repo
 if $init; then
   original="$(git rev-parse --show-toplevel)"
   clone="$(mktemp --directory)"
+  trap '/usr/bin/rm --interactive=never --recursive "$clone"' EXIT
   cd "$clone" > /dev/null || exit 1
 
   _git init > /dev/null

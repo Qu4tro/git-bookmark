@@ -3,6 +3,7 @@
 load 'test_helper/bats-support/load'
 load 'test_helper/bats-assert/load'
 load common
+load git
 
 setup(){
   repo_setup
@@ -17,7 +18,7 @@ teardown(){
 @test "init - bare" {
   refute branch_exists "bookmarks"
 
-  run git bk init
+  run git-bk init
   assert_success
   assert_line --partial "bookmarks"
   assert_line --partial "root-commit"
@@ -39,7 +40,7 @@ teardown(){
   refute branch_exists "bookmarks"
   refute branch_exists "other-branch"
 
-  run git bk init --branch "other-branch"
+  run git-bk init --branch "other-branch"
   assert_success
   assert_line --partial "other-branch"
   assert_line --partial "root-commit"
@@ -59,7 +60,7 @@ teardown(){
 }
 
 @test "init - with --session" {
-  run git bk init --session="other-session"
+  run git-bk init --session="other-session"
   assert_success
   assert_line --partial "bookmarks"
   assert_line --partial "root-commit"

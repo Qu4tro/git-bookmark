@@ -1,12 +1,26 @@
+#!/usr/bin/env bash
 
 # shellcheck disable=SC2129
 
+git-bk(){
+  "$(dirname "$BATS_TEST_DIRNAME")/git-bookmark" "$@"
+}
+
+test_dir(){
+  echo "$BATS_TMPDIR/test-git-bk-$BATS_TEST_NAME"
+}
+
 repo_setup(){
   # Setup our base git repo
-  mkdir -p "$BATS_TMPDIR/test-git-bk"
-  cd "$BATS_TMPDIR/test-git-bk" || exit 1
+  mkdir -p "$(test_dir)"
+  cd "$(test_dir)" || exit 1
   git init
   git commit -m "Master commit" --allow-empty
+}
+
+repo_teardown(){
+  # Just delete everything
+  rm -rf "$(test_dir)"
 }
 
 repo_manually_populate(){
@@ -66,30 +80,4 @@ repo_dirty_worktree(){
   git add staged
 
   touch untracked
-}
-
-
-repo_teardown(){
-  # Just delete everything
-  rm -rf "$BATS_TMPDIR/test-git-bk"
-}
-
-branch_exists(){
-  git show-ref --verify --quiet "refs/heads/$1"
-}
-
-last_commit_message(){
-  git show --no-patch --format=%s "$1"
-}
-
-number_of_commits(){
-  git rev-list --count "$1"
-}
-
-number_of_files(){
-  git show --name-only --format= "$1" | wc -l
-}
-
-file_exists_in_branch(){
-  git cat-file -e "$1:$2"
 }

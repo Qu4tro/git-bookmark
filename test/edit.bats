@@ -17,7 +17,7 @@ teardown(){
 @test "edit - empty" {
   export EDITOR=echo
 
-  run git bk edit --branch=empty
+  run git-bk edit --branch=empty
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
@@ -25,7 +25,7 @@ teardown(){
 @test "edit - bare" {
   export EDITOR=echo
 
-  run git bk edit
+  run git-bk edit
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
@@ -33,7 +33,7 @@ teardown(){
 @test "edit - with --branch" {
   export EDITOR=echo
 
-  run git bk edit --branch=bookmarks2
+  run git-bk edit --branch=bookmarks2
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
@@ -41,23 +41,23 @@ teardown(){
 @test "edit - with --session" {
   export EDITOR=echo
 
-  run git bk edit --session=links2
+  run git-bk edit --session=links2
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
 
 @test "edit - with --editor" {
-  run git bk edit --branch=empty --editor=echo
+  run git-bk edit --branch=empty --editor=echo
   assert_line "nothing to commit, working tree clean"
   assert_failure
 
-  run git bk edit --editor=rm --message="Removed file"
+  run git-bk edit --editor=rm --message="Removed file"
   assert_line --partial "bookmarks"
   assert_line --partial "delete mode"
   assert_line --partial "links"
   assert_success
 
-  run git bk edit --editor=touch --message="ReAdded file"
+  run git-bk edit --editor=touch --message="ReAdded file"
   assert_line --partial "bookmarks"
   assert_line --partial "create mode"
   assert_line --partial "links"
