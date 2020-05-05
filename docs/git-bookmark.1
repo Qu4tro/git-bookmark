@@ -13,7 +13,7 @@
 \fBgit\-bookmark\fR add [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] \fIurl\fR\.\.\.
 .
 .br
-\fBgit\-bookmark\fR edit [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-editor=\fIexecutable\fR]
+\fBgit\-bookmark\fR edit [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-editor=\fIexecutable\fR] [\-\-message=\fImessage\fR]
 .
 .br
 \fBgit\-bookmark\fR open [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-browser=\fIexecutable\fR]
@@ -59,11 +59,15 @@ Name of the branch to look for the bookmark file [default: bookmarks]\.
 Editor to use when editing a bookmark file [default: $EDITOR]\.
 .
 .TP
+\fB\-\-message=<message>\fR
+Commit message when editing\. When ommited it will prompt like git does\.
+.
+.TP
 \fB\-\-browser=<executable>\fR
 Browser to use when opening from a bookmark file [default: $BROWSER]\.
 .
 .TP
-\fB\-\-git\-verbose\fR
+\fB\-\-gitv\fR
 Show all of the underlyings git commands output\.
 .
 .SH "EXAMPLES"
@@ -192,10 +196,7 @@ nothing to commit, working tree clean
 We can see here with the help of \fB\-\-git\-verbose\fR option, that no commit is generated when no changes are made when editing\.
 .
 .P
-We\'re here\.
-.
-.br
-Finally, we\'ve arrived to our end \fBgoal\fR! To \fBopen\fR the saved bookmarks in your \fB$BROWSER\fR simply run:
+We\'re here\. Finally, we\'ve arrived to our end \fBgoal\fR! To \fBopen\fR the saved bookmarks in your \fB$BROWSER\fR simply run:
 .
 .IP "" 4
 .

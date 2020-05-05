@@ -33,8 +33,17 @@ lint:
 	shellcheck -s bash git-bookmark
 	@$(TASK_DONE)
 
-test:
+test: test/test_helper/bats-support test/test_helper/bats-assert
 	bats test
+
+test/test_helper/bats-support:
+	git clone https://github.com/bats-core/bats-support "$@"
+
+test/test_helper/bats-assert:
+	git clone https://github.com/bats-core/bats-assert "$@"
+
+clean:
+	rm -rf docs test/test_helper/
 
 install:
 	@install -v -d "$(DESTDIR)$(MANDIR)/man1"

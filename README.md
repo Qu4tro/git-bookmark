@@ -5,7 +5,7 @@ git-bookmark(1) -- Keep your bookmarks with your repository
 
 `git-bookmark` init [--session=<name>] [--branch=<name>] [--gitv]  
 `git-bookmark` add  [--session=<name>] [--branch=<name>] [--gitv] <url>...  
-`git-bookmark` edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>]  
+`git-bookmark` edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>] [--message=<message>]  
 `git-bookmark` open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]  
 `git-bookmark` list [--session=<name>] [--branch=<name>] [--gitv]  
 `git-bookmark` -h | --help  
@@ -58,22 +58,25 @@ Using the packaged `make install` also installs `git-bk` as an alias. This lets 
  * `-h`, `--help` :
    Displays the help screen.
 
- * `--version` : 
+ * `--version` :
    Displays version information.
 
- * `--session=<name>` : 
+ * `--session=<name>` :
    Name of the bookmark file [default: links].
 
- * `--branch=<name>` : 
+ * `--branch=<name>` :
    Name of the branch to look for the bookmark file [default: bookmarks].
 
- * `--editor=<executable>` : 
+ * `--editor=<executable>` :
    Editor to use when editing a bookmark file [default: $EDITOR].
 
- * `--browser=<executable>` : 
+ * `--message=<message>` :
+   Commit message when editing. When ommited it will prompt like git does.
+
+ * `--browser=<executable>` :
    Browser to use when opening from a bookmark file [default: $BROWSER].
 
- * `--git-verbose` : 
+ * `--gitv` :
    Show all of the underlyings git commands output.
 
 ## EXAMPLES
@@ -102,23 +105,23 @@ Comments can be added inline:
     $ git bk add --branch=other --session=local "http://127.0.0.1:8000/ # Server"
 
 
-The bookmarks can be **listed** as well: 
+The bookmarks can be **listed** as well:
 
     $ git bk list
     https://github.com/stephenmathieson/git-standup
     https://github.com/basherpm/basher
     https://en.wikipedia.org/wiki/Man_page
 
-    $ git bk list --branch=other --session=local 
+    $ git bk list --branch=other --session=local
     http://127.0.0.1:35729/
     http://127.0.0.1:8000/
 
 
-If more manual intervention you can **edit** the file by hand: 
+If more manual intervention you can **edit** the file by hand:
 
     $ git bk edit
 
-By default, it uses `$EDITOR`, but anything in `$PATH` can be specified: 
+By default, it uses `$EDITOR`, but anything in `$PATH` can be specified:
 
     $ git bk edit --editor=cat --git-verbose
     https://github.com/stephenmathieson/git-standup
@@ -131,10 +134,10 @@ By default, it uses `$EDITOR`, but anything in `$PATH` can be specified:
 
 We can see here with the help of `--git-verbose` option, that no commit is generated when no changes are made when editing.
 
-We're here.  
+We're here.
 Finally, we've arrived to our end **goal**! To **open** the saved bookmarks in your `$BROWSER` simply run:
 
-    $ git bk open 
+    $ git bk open
 
 And of course, we can use any of usual options when **opening**:
 

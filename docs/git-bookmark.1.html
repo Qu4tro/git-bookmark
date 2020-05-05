@@ -77,7 +77,7 @@
 
 <p><code>git-bookmark</code> init [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
 <code>git-bookmark</code> add  [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] <var>url</var>...<br />
-<code>git-bookmark</code> edit [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--editor=<var>executable</var>]<br />
+<code>git-bookmark</code> edit [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--editor=<var>executable</var>] [--message=<var>message</var>]<br />
 <code>git-bookmark</code> open [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--browser=<var>executable</var>]<br />
 <code>git-bookmark</code> list [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
 <code>git-bookmark</code> -h | --help<br />
@@ -99,8 +99,9 @@
 <dt><code>--session=&lt;name></code> </dt><dd><p>Name of the bookmark file [default: links].</p></dd>
 <dt><code>--branch=&lt;name></code> </dt><dd><p>Name of the branch to look for the bookmark file [default: bookmarks].</p></dd>
 <dt><code>--editor=&lt;executable></code> </dt><dd><p>Editor to use when editing a bookmark file [default: $EDITOR].</p></dd>
+<dt><code>--message=&lt;message></code> </dt><dd><p>Commit message when editing. When ommited it will prompt like git does.</p></dd>
 <dt><code>--browser=&lt;executable></code> </dt><dd><p>Browser to use when opening from a bookmark file [default: $BROWSER].</p></dd>
-<dt><code>--git-verbose</code> </dt><dd><p>Show all of the underlyings git commands output.</p></dd>
+<dt class="flush"><code>--gitv</code> </dt><dd><p>Show all of the underlyings git commands output.</p></dd>
 </dl>
 
 
@@ -141,7 +142,7 @@ https://github.com/stephenmathieson/git-standup
 https://github.com/basherpm/basher
 https://en.wikipedia.org/wiki/Man_page
 
-$ git bk list --branch=other --session=local 
+$ git bk list --branch=other --session=local
 http://127.0.0.1:35729/
 http://127.0.0.1:8000/
 </code></pre>
@@ -165,10 +166,10 @@ nothing to commit, working tree clean
 
 <p>We can see here with the help of <code>--git-verbose</code> option, that no commit is generated when no changes are made when editing.</p>
 
-<p>We're here.<br />
+<p>We're here.
 Finally, we've arrived to our end <strong>goal</strong>! To <strong>open</strong> the saved bookmarks in your <code>$BROWSER</code> simply run:</p>
 
-<pre><code>$ git bk open 
+<pre><code>$ git bk open
 </code></pre>
 
 <p>And of course, we can use any of usual options when <strong>opening</strong>:</p>

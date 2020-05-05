@@ -2,7 +2,6 @@
 
 load 'test_helper/bats-support/load'
 load 'test_helper/bats-assert/load'
-load 'test_helper/bats-file/load'
 
 setup(){
   mkdir -p "$BATS_TMPDIR/test-git-bk"
