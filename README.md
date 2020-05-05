@@ -14,6 +14,7 @@ git-bookmark(1) -- Keep your bookmarks with your repository
 ## INSTALLATION
 
 ### Dependencies
+- [git](https://git-scm.com/)
 - [docopts](https://github.com/docopt/docopts)
 
 ### Package managers
