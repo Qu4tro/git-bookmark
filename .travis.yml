@@ -1,0 +1,13 @@
+language: bash
+
+os:
+- linux
+
+before_script:
+  - |
+    sudo pip install docopts
+
+script:
+  - |
+    make lint
+    make test-seq

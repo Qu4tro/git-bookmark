@@ -10,7 +10,7 @@ all help:
 	@echo "  make lint"
 	@echo "  make docs"
 	@echo "  make test"
-	@echo "  make test-parallel"
+	@echo "  make test-seq"
 	@echo "  make install"
 	@echo "  make uninstall"
 
@@ -35,13 +35,12 @@ lint:
 	@$(TASK_DONE)
 
 test: test/test_helper/bats-support test/test_helper/bats-assert
-	@bats test
-	@$(TASK_DONE)
-
-test-parallel: test/test_helper/bats-support test/test_helper/bats-assert
 	@bats test --jobs 8
 	@$(TASK_DONE)
 
+test-seq: test/test_helper/bats-support test/test_helper/bats-assert
+	@bats test
+	@$(TASK_DONE)
 
 test/test_helper/bats-support:
 	git clone https://github.com/bats-core/bats-support "$@"

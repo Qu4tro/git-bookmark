@@ -59,7 +59,7 @@ require_git_repo() {
 }
 
 _git() {
-  if "$gitv"; then
+  if [ -z "${gitv}" ]; then
     { git "$@" ; }
   else
     { git "$@" ; } 2> /dev/null
@@ -76,7 +76,7 @@ enter_branch() {
     echo "Tip: Run 'git bookmark init'"
     exit 1
   fi
-  trap '/usr/bin/rm --interactive=never --recursive "$clone"' EXIT
+  trap 'rm --interactive=never --recursive "$clone"' EXIT
 
   # Change directory to our cloned repo
   cd "$clone" > /dev/null || exit 1
@@ -103,7 +103,7 @@ require_git_repo
 if $init; then
   original="$(git rev-parse --show-toplevel)"
   clone="$(mktemp --directory)"
-  trap '/usr/bin/rm --interactive=never --recursive "$clone"' EXIT
+  trap 'rm --interactive=never --recursive "$clone"' EXIT
   cd "$clone" > /dev/null || exit 1
 
   _git init > /dev/null
