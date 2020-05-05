@@ -25,7 +25,7 @@ Usage:
     --version               Displays version information.
 
     --session=<name>        Name of the bookmark file
-                            [default: master].
+                            [default: links].
 
     --branch=<name>         Name of the branch to look for the bookmark file
                             [default: bookmarks].
