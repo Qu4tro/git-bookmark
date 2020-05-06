@@ -13,13 +13,13 @@
 \fBgit\-bookmark\fR add [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] \fIurl\fR\.\.\.
 .
 .br
-\fBgit\-bookmark\fR edit [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-editor=\fIexecutable\fR] [\-\-message=\fImessage\fR]
+\fBgit\-bookmark\fR list [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv]
 .
 .br
 \fBgit\-bookmark\fR open [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-browser=\fIexecutable\fR]
 .
 .br
-\fBgit\-bookmark\fR list [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv]
+\fBgit\-bookmark\fR edit [\-\-session=\fIname\fR] [\-\-branch=\fIname\fR] [\-\-gitv] [\-\-editor=\fIexecutable\fR] [\-\-message=\fImessage\fR]
 .
 .br
 \fBgit\-bookmark\fR \-h | \-\-help
@@ -127,7 +127,7 @@ $ git bk add \-\-branch=other \-\-session=local http://127\.0\.0\.1:35729/
 .IP "" 0
 .
 .P
-Comments can be added inline:
+Comments can be \fBadded\fR inline:
 .
 .IP "" 4
 .
@@ -179,7 +179,7 @@ By default, it uses \fB$EDITOR\fR, but anything in \fB$PATH\fR can be specified:
 .
 .nf
 
-$ git bk edit \-\-editor=cat \-\-git\-verbose
+$ git bk edit \-\-editor=cat \-\-gitv
 https://github\.com/stephenmathieson/git\-standup
 https://github\.com/basherpm/basher
 https://en\.wikipedia\.org/wiki/Man_page
@@ -193,7 +193,7 @@ nothing to commit, working tree clean
 .IP "" 0
 .
 .P
-We can see here with the help of \fB\-\-git\-verbose\fR option, that no commit is generated when no changes are made when editing\.
+We can see here with the help of `\-\-gitv option, that no commit is generated when no changes are made when editing\.
 .
 .P
 We\'re here\. Finally, we\'ve arrived to our end \fBgoal\fR! To \fBopen\fR the saved bookmarks in your \fB$BROWSER\fR simply run:

@@ -1,49 +1,3 @@
-git-bookmark(1) -- Keep your bookmarks with your repository
-=============================================
-
-## SYNOPSIS
-
-**git-bookmark** init [--session=<name>] [--branch=<name>] [--gitv]  
-**git-bookmark** add  [--session=<name>] [--branch=<name>] [--gitv] <url>...  
-**git-bookmark** list [--session=<name>] [--branch=<name>] [--gitv]  
-**git-bookmark** open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]  
-**git-bookmark** edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>] [--message=<message>]  
-**git-bookmark** -h | --help  
-**git-bookmark** --version  
-
-## DESCRIPTION
-
-Simple git subcommand to save URLs into append files in a separate branch. The goal is to keep web sessions related to a repository within it.
-
-The bookmark file format supports # comments and ignores any extra whitespace. URLs are never checked for validity.
-
-Using the packaged `make install` also installs `git-bk` as an alias. This lets `git bk` be used for brevity sake.
-
-## OPTIONS
-
- * `-h`, `--help` :
-   Displays the help screen.
-
- * `--version` :
-   Displays version information.
-
- * `--session=<name>` :
-   Name of the bookmark file [default: links].
-
- * `--branch=<name>` :
-   Name of the branch to look for the bookmark file [default: bookmarks].
-
- * `--editor=<executable>` :
-   Editor to use when editing a bookmark file [default: $EDITOR].
-
- * `--message=<message>` :
-   Commit message when editing. When ommited it will prompt like git does.
-
- * `--browser=<executable>` :
-   Browser to use when opening from a bookmark file [default: $BROWSER].
-
- * `--gitv` :
-   Show all of the underlyings git commands output.
 
 ## EXAMPLES
 
@@ -111,12 +65,3 @@ And of course, we can use any of usual options when **opening**:
     http://127.0.0.1:35729/
     http://127.0.0.1:8000/
 
-
-## COPYRIGHT
-
-**git-bookmark** - Copyright 2020, Xavier Francisco.
-Released under the MIT license.
-
-## SEE ALSO
-
-git(1)

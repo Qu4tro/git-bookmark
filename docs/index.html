@@ -75,13 +75,13 @@
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
-<p><code>git-bookmark</code> init [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
-<code>git-bookmark</code> add  [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] <var>url</var>...<br />
-<code>git-bookmark</code> edit [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--editor=<var>executable</var>] [--message=<var>message</var>]<br />
-<code>git-bookmark</code> open [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--browser=<var>executable</var>]<br />
-<code>git-bookmark</code> list [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
-<code>git-bookmark</code> -h | --help<br />
-<code>git-bookmark</code> --version</p>
+<p><strong>git-bookmark</strong> init [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
+<strong>git-bookmark</strong> add  [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] <var>url</var>...<br />
+<strong>git-bookmark</strong> list [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv]<br />
+<strong>git-bookmark</strong> open [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--browser=<var>executable</var>]<br />
+<strong>git-bookmark</strong> edit [--session=<var>name</var>] [--branch=<var>name</var>] [--gitv] [--editor=<var>executable</var>] [--message=<var>message</var>]<br />
+<strong>git-bookmark</strong> -h | --help<br />
+<strong>git-bookmark</strong> --version</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -130,7 +130,7 @@ $ git bk add https://github.com/basherpm/basher https://en.wikipedia.org/wiki/Ma
 <pre><code>$ git bk add --branch=other --session=local http://127.0.0.1:35729/
 </code></pre>
 
-<p>Comments can be added inline:</p>
+<p>Comments can be <strong>added</strong> inline:</p>
 
 <pre><code>$ git bk add --branch=other --session=local "http://127.0.0.1:8000/ # Server"
 </code></pre>
@@ -154,7 +154,7 @@ http://127.0.0.1:8000/
 
 <p>By default, it uses <code>$EDITOR</code>, but anything in <code>$PATH</code> can be specified:</p>
 
-<pre><code>$ git bk edit --editor=cat --git-verbose
+<pre><code>$ git bk edit --editor=cat --gitv
 https://github.com/stephenmathieson/git-standup
 https://github.com/basherpm/basher
 https://en.wikipedia.org/wiki/Man_page
@@ -164,7 +164,7 @@ Your branch is up to date with 'origin/bookmarks'.
 nothing to commit, working tree clean
 </code></pre>
 
-<p>We can see here with the help of <code>--git-verbose</code> option, that no commit is generated when no changes are made when editing.</p>
+<p>We can see here with the help of `--gitv option, that no commit is generated when no changes are made when editing.</p>
 
 <p>We're here.
 Finally, we've arrived to our end <strong>goal</strong>! To <strong>open</strong> the saved bookmarks in your <code>$BROWSER</code> simply run:</p>

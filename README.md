@@ -2,16 +2,23 @@ git-bookmark(1) -- Keep your bookmarks with your repository
 =============================================
 
 ## SYNOPSIS
-
 ```
 git-bookmark init [--session=<name>] [--branch=<name>] [--gitv]  
 git-bookmark add  [--session=<name>] [--branch=<name>] [--gitv] <url>...  
-git-bookmark edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>] [--message=<message>]  
-git-bookmark open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]  
 git-bookmark list [--session=<name>] [--branch=<name>] [--gitv]  
+git-bookmark open [--session=<name>] [--branch=<name>] [--gitv] [--browser=<executable>]
+git-bookmark edit [--session=<name>] [--branch=<name>] [--gitv] [--editor=<executable>] [--message=<message>]  
 git-bookmark -h | --help  
 git-bookmark --version  
 ```
+
+## DESCRIPTION
+
+Simple git subcommand to save URLs into append files in a separate branch. The goal is to keep web sessions related to a repository within it.
+
+The bookmark file format supports # comments and ignores any extra whitespace. URLs are never checked for validity.
+
+Using the packaged `make install` also installs `git-bk` as an alias. This lets `git bk` be used for brevity sake.
 
 ## INSTALLATION
 
@@ -50,14 +57,6 @@ Once we've extracted the tarball (or cd'd into the repo), just run:
 
 Finally, you can install the script by just copying it somewhere on PATH.
 It won't install the manpages and set the proper permissions, but it should work fine.
-
-## DESCRIPTION
-
-Simple git subcommand to save URLs into append files in a separate branch. The goal is to keep web sessions related to a repository within it.
-
-The bookmark file format supports # comments and ignores any extra whitespace. URLs are never checked for validity.
-
-Using the packaged `make install` also installs `git-bk` as an alias. This lets `git bk` be used for brevity sake.
 
 ## OPTIONS
 
@@ -129,7 +128,7 @@ If more manual intervention you can **edit** the file by hand:
 
 By default, it uses `$EDITOR`, but anything in `$PATH` can be specified:
 
-    $ git bk edit --editor=cat --git-verbose
+    $ git bk edit --editor=cat --gitv
     https://github.com/stephenmathieson/git-standup
     https://github.com/basherpm/basher
     https://en.wikipedia.org/wiki/Man_page
@@ -138,7 +137,7 @@ By default, it uses `$EDITOR`, but anything in `$PATH` can be specified:
 
     nothing to commit, working tree clean
 
-We can see here with the help of `--git-verbose` option, that no commit is generated when no changes are made when editing.
+We can see here with the help of `--gitv option, that no commit is generated when no changes are made when editing.
 
 We're here.
 Finally, we've arrived to our end **goal**! To **open** the saved bookmarks in your `$BROWSER` simply run:

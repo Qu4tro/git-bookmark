@@ -15,14 +15,14 @@ all help:
 	@echo "  make uninstall"
 
 
-docs: docs/git-bookmark.1 docs/git-bookmark.1.html docs/index.html
+docs: docs/git-bookmark.1 docs/git-bookmark.1.html docs/index.html README.md
 	@$(TASK_DONE)
 
-docs/git-bookmark.md: README.md
-	@mkdir -p docs
-	@# slice from INSTALLATION section to DESCRIPTION section
-	@sed -e "$$(cat README.md | grep INSTALLATION -n | cut -d: -f1),$$(cat README.md | grep DESCRIPTION -n -B1 | head -1 | cut -d- -f1)d" README.md > "$@"
-	@echo "Copy partial README.md to $@"
+README.md: docs/parts
+	@cat docs/parts/0[01]-GH-*.md docs/parts/0[234567]* > "$@"
+
+docs/git-bookmark.md: docs/parts
+	@cat docs/parts/0[01]-MAN-*.md docs/parts/0[24567]* > "$@"
 
 docs/git-bookmark.1 docs/git-bookmark.1.html: docs/git-bookmark.md
 	ronn "$<"
@@ -49,7 +49,10 @@ test/test_helper/bats-assert:
 	git clone https://github.com/bats-core/bats-assert "$@"
 
 clean:
-	rm -rf docs test/test_helper/
+	rm -f docs/git-bookmark.md docs/git-bookmark.1
+	rm -f docs/index.html docs/git-bookmark.1.html
+	rm -f README.md
+	rm -rf test/test_helper/
 
 install:
 	@install -v -d "$(DESTDIR)$(MANDIR)/man1"
