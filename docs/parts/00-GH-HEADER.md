@@ -1,2 +1,2 @@
-git-bookmark(1) -- Keep your bookmarks with your repository
-=============================================
+# git-bookmark  
+_Keep your bookmarks with your repository_
