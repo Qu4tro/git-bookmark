@@ -13,35 +13,27 @@ teardown(){
 }
 
 @test "edit - empty" {
-  export EDITOR=echo
-
-  run git-bk edit --branch=empty
+  run env EDITOR=echo git-bk edit --branch=empty
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
 
 
 @test "edit - bare" {
-  export EDITOR=echo
-
-  run git-bk edit
+  run env EDITOR=echo git-bk edit
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
 
 
 @test "edit - with --branch" {
-  export EDITOR=echo
-
-  run git-bk edit --branch=bookmarks2
+  run env EDITOR=echo git-bk edit --branch=bookmarks2
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
 
 @test "edit - with --session" {
-  export EDITOR=echo
-
-  run git-bk edit --session=links2
+  run env EDITOR=echo git-bk edit --session=links2
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
@@ -81,5 +73,3 @@ teardown(){
   assert_line --partial "create mode"
   assert_line --partial "links"
 }
-
-
