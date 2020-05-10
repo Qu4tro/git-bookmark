@@ -60,6 +60,8 @@ clean:
 	rm -rf test/test_helper/
 
 install:
+	@install -v -d "$(DESTDIR)$(MANDIR)/man1"
+	@install -v -d "$(DESTDIR)$(BINDIR)/"
 	@install -v -m 0755 "git-bookmark" "$(DESTDIR)$(BINDIR)/git-bookmark"
 	@install -v -m 0755 "git-bookmark" "$(DESTDIR)$(BINDIR)/git-bk"
 	@install -v -m 0644 docs/git-bookmark.1 "$(DESTDIR)$(MANDIR)/man1/git-bookmark.1"
