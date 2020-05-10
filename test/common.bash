@@ -6,7 +6,7 @@ load 'test_helper/bats-support/load'
 load 'test_helper/bats-assert/load'
 
 git-bk(){
-  "$(dirname "$BATS_TEST_DIRNAME")/git-bookmark" "$@"
+  env EDITOR=echo "$(dirname "$BATS_TEST_DIRNAME")/git-bookmark" "$@"
 }
 
 test_dir(){

@@ -34,6 +34,11 @@ lint:
 	@shellcheck --shell bash git-bookmark test/*.bats
 	@$(TASK_DONE)
 
+lint-tests:
+	@shellcheck test/*.bats
+	@$(TASK_DONE)
+
+
 test: test/test_helper/bats-support test/test_helper/bats-assert
 	@bats test --jobs 8
 	@$(TASK_DONE)

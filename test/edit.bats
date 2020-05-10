@@ -13,27 +13,27 @@ teardown(){
 }
 
 @test "edit - empty" {
-  run env EDITOR=echo git-bk edit --branch=empty
+  run git-bk edit --branch=empty
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
 
 
 @test "edit - bare" {
-  run env EDITOR=echo git-bk edit
+  run git-bk edit
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
 
 
 @test "edit - with --branch" {
-  run env EDITOR=echo git-bk edit --branch=bookmarks2
+  run git-bk edit --branch=bookmarks2
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
 
 @test "edit - with --session" {
-  run env EDITOR=echo git-bk edit --session=links2
+  run git-bk edit --session=links2
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
