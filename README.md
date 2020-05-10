@@ -31,7 +31,7 @@ Using the packaged `make install` also installs `git-bk` as an alias. This lets 
 - [docopts (Latest Python release)](https://github.com/docopt/docopts)
 
 You'll need to install them on your own, unless you use a recommended method for installation.
-You should be able to just install `docopts` with:
+You should be able to install `docopts` with:
 ```
    pip install docopts
 ```
@@ -163,7 +163,3 @@ And of course, we can use any of usual options when **opening**:
 
 **git-bookmark** - Copyright 2020, Xavier Francisco.
 Released under the MIT license.
-
-## SEE ALSO
-
-git(1)

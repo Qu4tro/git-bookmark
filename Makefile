@@ -19,10 +19,10 @@ docs: docs/git-bookmark.1 docs/git-bookmark.1.html docs/index.html README.md
 	@$(TASK_DONE)
 
 README.md: docs/parts
-	@cat docs/parts/0[01]-GH-*.md docs/parts/0[234567]* > "$@"
+	@ls docs/parts/*-GH-*.md docs/parts/*-ANY-*.md | xargs cat > "$@"
 
 docs/git-bookmark.md: docs/parts
-	@cat docs/parts/0[01]-MAN-*.md docs/parts/0[24567]* > "$@"
+	@ls docs/parts/*-MAN-*.md docs/parts/*-ANY-*.md | xargs cat > "$@"
 
 docs/git-bookmark.1 docs/git-bookmark.1.html: docs/git-bookmark.md
 	ronn "$<"

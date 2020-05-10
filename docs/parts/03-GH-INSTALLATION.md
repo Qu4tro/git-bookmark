@@ -5,8 +5,8 @@
 - [git](https://git-scm.com/)
 - [docopts (Latest Python release)](https://github.com/docopt/docopts)
 
-You'll need to install them when installing, with all, but the recommended installation methods.
-To install `docopts`:
+You'll need to install them on your own, unless you use a recommended method for installation.
+You should be able to install `docopts` with:
 ```
    pip install docopts
 ```
