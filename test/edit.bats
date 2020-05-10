@@ -1,7 +1,5 @@
 #!/usr/bin/env bats
 
-load 'test_helper/bats-support/load'
-load 'test_helper/bats-assert/load'
 load common
 
 setup(){
@@ -22,6 +20,7 @@ teardown(){
   assert_failure
 }
 
+
 @test "edit - bare" {
   export EDITOR=echo
 
@@ -29,6 +28,7 @@ teardown(){
   assert_line "nothing to commit, working tree clean"
   assert_failure
 }
+
 
 @test "edit - with --branch" {
   export EDITOR=echo
@@ -62,3 +62,24 @@ teardown(){
   assert_line --partial "create mode"
   assert_line --partial "links"
 }
+
+
+@test "add - with --editor not on root" {
+  cd staged-dir
+  run git-bk edit --branch=empty --editor=echo
+  assert_line "nothing to commit, working tree clean"
+  assert_failure
+
+  run git-bk edit --editor=rm --message="Removed file"
+  assert_line --partial "bookmarks"
+  assert_line --partial "delete mode"
+  assert_line --partial "links"
+  assert_success
+
+  run git-bk edit --editor=touch --message="ReAdded file"
+  assert_line --partial "bookmarks"
+  assert_line --partial "create mode"
+  assert_line --partial "links"
+}
+
+

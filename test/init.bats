@@ -1,7 +1,5 @@
 #!/usr/bin/env bats
 
-load 'test_helper/bats-support/load'
-load 'test_helper/bats-assert/load'
 load common
 load git
 
@@ -60,6 +58,30 @@ teardown(){
 }
 
 @test "init - with --session" {
+  run git-bk init --session="other-session"
+  assert_success
+  assert_line --partial "bookmarks"
+  assert_line --partial "root-commit"
+  assert_line --partial "Initial Commit"
+  assert_line --partial "1 file changed, 0 insertions(+), 0 deletions(-)"
+  assert_line --partial "create mode 100644 other-session"
+
+  assert branch_exists "bookmarks"
+
+  run file_exists_in_branch "bookmarks" "other-session"
+  assert_success
+  run file_exists_in_branch "bookmarks" "links"
+  assert_failure
+
+  assert_equal "$(number_of_files bookmarks)" "1"
+  assert_equal "$(last_commit_message bookmarks)" "Initial Commit"
+  assert_equal "$(number_of_commits bookmarks)" "1"
+}
+
+
+@test "init - with --session not on root" {
+  cd staged-dir
+
   run git-bk init --session="other-session"
   assert_success
   assert_line --partial "bookmarks"

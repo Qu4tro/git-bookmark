@@ -1,7 +1,5 @@
 #!/usr/bin/env bats
 
-load 'test_helper/bats-support/load'
-load 'test_helper/bats-assert/load'
 load common
 
 setup(){
@@ -33,6 +31,12 @@ teardown(){
 }
 
 @test "open - with --session" {
+  run git-bk open --session=links2 --browser=echo
+  assert_output "url3 url4"
+}
+
+@test "open - with --session not on root" {
+  cd staged-dir
   run git-bk open --session=links2 --browser=echo
   assert_output "url3 url4"
 }

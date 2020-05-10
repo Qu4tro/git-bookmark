@@ -1,7 +1,5 @@
 #!/usr/bin/env bats
 
-load 'test_helper/bats-support/load'
-load 'test_helper/bats-assert/load'
 load common
 
 setup(){
@@ -38,6 +36,16 @@ teardown(){
 }
 
 @test "list - with --session" {
+  run git-bk list --session=links2
+  assert_line "url3"
+  assert_line "url4"
+
+  assert_equal "$(git-bk list | wc -l)" 2
+}
+
+@test "list - with --session not on root" {
+  cd staged-dir
+
   run git-bk list --session=links2
   assert_line "url3"
   assert_line "url4"

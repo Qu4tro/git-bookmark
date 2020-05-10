@@ -42,7 +42,7 @@ Options:
     --gitv                  Show all of the underlyings git commands stderr.
 
 ----
-git-bookmark 0.4.1
+git-bookmark 0.4.2
 Copyright (C) 2020 Xavier Francisco
 License MIT
 This is free software: you are free to change and redistribute it.
@@ -69,8 +69,9 @@ _git() {
 
 enter_branch() {
   # Enter the branch to work with
+  origin="$(git rev-parse --show-toplevel)"
   clone="$(mktemp --directory)"
-  if ! _git clone . --branch="$branch" "$clone"; then
+  if ! _git clone "$origin" --branch="$branch" "$clone"; then
     echo 'Bookmark branch not initialized. Aborting.'
     echo ''
     echo "Tip: Run 'git bookmark init'"

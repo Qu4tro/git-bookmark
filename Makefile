@@ -31,7 +31,7 @@ docs/index.html: docs/git-bookmark.1.html
 	cp "$<" "$@"
 
 lint:
-	@shellcheck -s bash git-bookmark
+	@shellcheck --shell bash git-bookmark
 	@$(TASK_DONE)
 
 test: test/test_helper/bats-support test/test_helper/bats-assert

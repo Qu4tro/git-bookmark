@@ -1,7 +1,5 @@
 #!/usr/bin/env bats
 
-load 'test_helper/bats-support/load'
-load 'test_helper/bats-assert/load'
 load common
 
 setup(){
@@ -23,6 +21,16 @@ teardown(){
 }
 
 @test "add - multiple" {
+  run git-bk add "url1" "url2 " "url3 # hey"
+  assert_line --partial "Added 3 new bookmarks"
+  assert_line --partial "1 file changed"
+  assert_line --partial "3 insertion"
+  assert_success
+}
+
+
+@test "add - not on root" {
+  cd staged-dir
   run git-bk add "url1" "url2 " "url3 # hey"
   assert_line --partial "Added 3 new bookmarks"
   assert_line --partial "1 file changed"
