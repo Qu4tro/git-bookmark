@@ -12,10 +12,11 @@ I recommend you install `docopts` with:
 ```
 And git shouldn't be a problem installing if you're reading this.
 
-### Recommend methods [WIP]
+### Recommend methods
 
 If you're on Arch Linux `git-bookmark` is available on AUR:
-- [AUR Package](https://aur.archlinux.org/packages/git-bookmark/)
+- [git-bookmark](https://aur.archlinux.org/packages/git-bookmark/)
+- [git-bookmark-git (upstream)](https://aur.archlinux.org/packages/git-bookmark-git/)
 
 
 ### Manual setup
@@ -36,7 +37,7 @@ It won't install the manpages and set the proper permissions, but it should work
 Alternatively you can use a bash package manager to install it, like [basher](https://github.com/basherpm/basher) or [bpkg](https://github.com/bpkg/bpkg).
 
 ```
-   bpkg install qu4tro/git-bookmark # -g for global install
+   bpkg install qu4tro/git-bookmark -g
    # or
    basher install qu4tro/git-bookmark
 ```
